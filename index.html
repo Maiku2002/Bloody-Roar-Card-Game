@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BR Stats - LAN 4.1 Visual</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+
+<div id="screen-menu" class="screen active-screen main-menu">
+    <div class="menu-title">Bloody Roar Card Game</div>
+    <button class="menu-btn" onclick="showScreen('screen-lan')">JUGAR LAN/ONLINE</button>
+    <button class="menu-btn" onclick="startPractice()">VER ROSTER</button>
+</div>
+
+<div id="screen-lan" class="screen">
+    <div class="nav-bar"><button class="btn-back" onclick="exitToMenu()">← ATRÁS</button></div>
+    <div class="network-status">
+        <div style="margin-bottom: 20px;">
+            <div style="color:#94a3b8; font-size: 0.8rem;">TU ID (TOCA PARA COPIAR):</div>
+            <div id="my-peer-id" style="color:var(--accent); font-size: 1.8rem; font-family:monospace; font-weight:bold; cursor:pointer;" onclick="copyID()">GENERANDO...</div>
+        </div>
+        <input type="text" id="remote-id" class="p2p-input" placeholder="CÓDIGO RIVAL" maxlength="8">
+        <button class="btn-action" id="btn-connect" onclick="connectToPeer()">CONECTAR AHORA</button>
+    </div>
+</div>
+
+<div id="screen-draft" class="screen">
+    <div id="draft-turn-msg" class="turn-indicator rival-turn">ESPERANDO...</div>
+    <div class="selector-area">
+        <div style="font-size: 0.9rem; font-weight: bold;">ELIGE TUS 3 LUCHADORES</div>
+        <div class="chip-grid" id="lista-draft"></div>
+    </div>
+    <div style="color:#94a3b8">Seleccionados: <span id="draft-count">0</span>/3</div>
+</div>
+
+<div id="screen-roster" class="screen">
+    <div class="nav-bar"><button class="btn-back" onclick="exitToMenu()">← SALIR</button></div>
+    <div class="selector-area">
+        <div id="roster-title" style="font-size: 0.9rem; font-weight: bold;">TUS LUCHADORES</div>
+        <div class="chip-grid" id="lista-seleccion"></div>
+    </div>
+    <div class="dashboard" id="dashboard"></div>
+</div>
+
+<div id="modal-confirm" class="modal">
+    <div class="modal-content">
+        <h3>¿LISTOS PARA PELEAR?</h3>
+        <p>Se han elegido los 3 luchadores por bando.</p>
+        <div style="display:flex; gap:15px; justify-content:center; margin-top:20px;">
+            <button class="btn-action" style="background:var(--success); width:100px" id="btn-si" onclick="sendReady(true)">SÍ</button>
+            <button class="btn-action" style="background:var(--reset); width:100px" onclick="sendReady(false)">NO</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
